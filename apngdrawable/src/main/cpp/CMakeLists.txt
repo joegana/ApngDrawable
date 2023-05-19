@@ -15,6 +15,8 @@ file(GLOB_RECURSE  apng_drawable_source
          io/*.cpp
         )
 
+add_definitions(-DBUILD_DEBUG)
+
 add_library(
         apng-drawable
         SHARED

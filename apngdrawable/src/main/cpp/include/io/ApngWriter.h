@@ -7,17 +7,22 @@
 #include <io/Writer.h>
 namespace apng{
     class ApngWriter final: public Writer{
-    public:
-        void reset(size_t size) override  ;
-        void putByte(uint8_t b) override  ;
-        void putBytes(const uint8_t* bytes,size_t count) override;
-        size_t position() override ;
-        void skip(size_t length)override ;
-        uint8_t * toByteArray() override ;
-         void close() override final;
+        public:
+            void reset(size_t size) override  ;
+            void putByte(uint8_t b) override  ;
+            void putBytes(const uint8_t* bytes,size_t count) override;
+            size_t position() override ;
+            void skip(size_t length)override ;
+            uint8_t * toByteArray() override ;
+            void close() override ;
 
-         void putInt(size_t val);
-         void putFourCC(size_t val);
+            void putInt(size_t val);
+            void putFourCC(size_t val);
+
+    private:
+            uint8_t * fbuf;
+            size_t size ;
+            size_t pos;
     };
 }
 

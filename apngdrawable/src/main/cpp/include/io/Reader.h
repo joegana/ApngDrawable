@@ -18,13 +18,13 @@
 namespace apng{
     class Reader {
         public:
-            virtual size_t skip(size_t total);
-            virtual int8_t peek();
-            virtual void reset();
-            virtual size_t position();
-            virtual size_t read(uint8_t * buffer,size_t start,size_t count);
-            virtual size_t available();
-            virtual void close();
+            virtual size_t skip(size_t total) = 0;
+            virtual int8_t peek() = 0;
+            virtual void reset() =  0;
+            virtual size_t position() = 0;
+            virtual size_t read(uint8_t * buffer,size_t start,size_t count) = 0;
+            virtual size_t available() = 0 ;
+            virtual void close() = 0;
     };
 
 }

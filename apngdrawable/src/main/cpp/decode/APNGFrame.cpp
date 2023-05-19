@@ -21,7 +21,7 @@ namespace apng{
         this->frameX = fctlChunk->getXOffset();
         this->frameY = fctlChunk->getYOffset();
     }
-    int APNGFrame::encode(ApngWriter *writer) {
+    size_t APNGFrame::encode(ApngWriter *writer) {
         assert(writer);
         size_t fSize = 8 + 13 + 12 ;
 

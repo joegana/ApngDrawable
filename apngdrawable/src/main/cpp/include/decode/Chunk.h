@@ -16,7 +16,6 @@
 namespace apng{
     class Chunk {
         public:
-
             void setLength(int len){
                 this->length = len;
             }
@@ -48,6 +47,7 @@ namespace apng{
         virtual void innerParse(ApngReader * reader)  = 0;
 
     private:
+        Chunk(Chunk & chunk) = delete;
         uint32_t length ;
         uint32_t fourcc ;
         uint32_t crc ;

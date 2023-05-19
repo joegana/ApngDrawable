@@ -21,7 +21,7 @@ namespace apng{
             virtual size_t position() = 0 ;
             virtual void skip(size_t length) = 0;
             virtual uint8_t * toByteArray() = 0;
-            virtual void close();
+            virtual void close() = 0 ;
     };
 }
 #endif //APNGDRAWABLE_WRITER_H
