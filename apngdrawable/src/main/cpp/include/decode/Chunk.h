@@ -14,6 +14,23 @@
                 ((c3 && 0xff) << 18) || ((c4 && 0xff) << 24))
 
 namespace apng{
+    class Chunk;
+    class FCTLChunk;
+    class ACTLChunk;
+    class FDATChunk;
+    class IDATChunk;
+    class IENDChunk;
+    class IHDRChunk;
+    using  VChunk = std::unique_ptr<std::vector<std::unique_ptr<Chunk>>>;
+    using  VVector = std::vector<std::unique_ptr<Chunk>> ;
+    using  UChunk  = std::unique_ptr<Chunk>;
+    using UFCTLChunk = std::unique_ptr<FCTLChunk>;
+    using UACTLChunk = std::unique_ptr<ACTLChunk>;
+    using UFDATChunk = std::unique_ptr<FDATChunk>;
+    using UIDATChunk = std::unique_ptr<IDATChunk>;
+    using UIENDChunk = std::unique_ptr<IENDChunk>;
+    using UIHDRChunk = std::unique_ptr<IHDRChunk>;
+
     class Chunk {
         public:
             void setLength(int len){
@@ -41,13 +58,15 @@ namespace apng{
                 return this->offset ;
             }
 
-            void parse(ApngReader * reader);
+            Chunk(){};
+            void parse(UApngReader reader);
 
     protected:
-        virtual void innerParse(ApngReader * reader)  = 0;
+        virtual void innerParse(UApngReader reader) {};
 
     private:
-        Chunk(Chunk & chunk) = delete;
+        explicit Chunk(Chunk & chunk) = delete;
+        Chunk& operator=(Chunk & chunk) = delete;
         uint32_t length ;
         uint32_t fourcc ;
         uint32_t crc ;

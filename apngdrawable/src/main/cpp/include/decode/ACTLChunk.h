@@ -9,7 +9,9 @@
 namespace apng{
     class ACTLChunk: public Chunk{
     public:
-        static const int ID = fourCCToInt('a','c','T','L');
+        ACTLChunk(){};
+
+        static const int ID = fourCCToInt('a', 'c', 'T', 'L');
         void setNumFrames(size_t n){
             this->num_frames = n ;
         }
@@ -23,8 +25,9 @@ namespace apng{
             return this->num_plays;
         }
     protected:
-        virtual void innerParse(ApngReader * reader) override;
+        virtual void innerParse(UApngReader reader) override;
     private:
+        ACTLChunk(ACTLChunk & chunk) = delete;
         uint32_t num_frames;
         uint32_t num_plays;
     };

@@ -5,6 +5,7 @@
 #ifndef APNGDRAWABLE_APNGWRITER_H
 #define APNGDRAWABLE_APNGWRITER_H
 #include <io/Writer.h>
+#include <io/Reader.h>
 namespace apng{
     class ApngWriter final: public Writer{
         public:

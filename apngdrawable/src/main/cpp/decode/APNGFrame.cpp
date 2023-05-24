@@ -4,24 +4,29 @@
 
 #include "decode/APNGFrame.h"
 namespace apng{
-    APNGFrame::APNGFrame(ApngReader *reader, FCTLChunk *fctlChunk) {
-        assert(reader);
-        assert(fctlChunk);
-        this->reader = reader;
-        this->blend_op = fctlChunk->getBlendOp();
-        this->dispose_op = fctlChunk->getDisposeOp();
-        auto delayDen = fctlChunk->getDelayDen();
-        size_t during = fctlChunk->getDelayNum() * 1000 / (delayDen?delayDen:100);
-        if(during < 10){
-            during = 100 ;
-        }
-        this->frameDuring = during;
-        this->frameWidth = fctlChunk->getWidth();
-        this->frameHeight = fctlChunk->getHeight();
-        this->frameX = fctlChunk->getXOffset();
-        this->frameY = fctlChunk->getYOffset();
+
+    APNGFrame::APNGFrame(UApngReader reader): APNGFrame(std::move(reader), nullptr) {
     }
-    size_t APNGFrame::encode(ApngWriter *writer) {
+
+    APNGFrame::APNGFrame(UApngReader reader, UFCTLChunk fctlChunk) {
+        assert(reader);
+        this->reader = std::move(reader);
+        if(fctlChunk){
+            this->blend_op = fctlChunk->getBlendOp();
+            this->dispose_op = fctlChunk->getDisposeOp();
+            auto delayDen = fctlChunk->getDelayDen();
+            size_t during = fctlChunk->getDelayNum() * 1000 / (delayDen?delayDen:100);
+            if(during < 10){
+                during = 100 ;
+            }
+            this->frameDuring = during;
+            this->frameWidth = fctlChunk->getWidth();
+            this->frameHeight = fctlChunk->getHeight();
+            this->frameX = fctlChunk->getXOffset();
+            this->frameY = fctlChunk->getYOffset();
+        }
+    }
+    size_t APNGFrame::encode(UApngWriter writer) {
         assert(writer);
         size_t fSize = 8 + 13 + 12 ;
 

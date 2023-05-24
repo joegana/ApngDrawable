@@ -39,6 +39,10 @@ namespace apng{
     void ApngReader::close() {
         assert(aReader);
         aReader->close();
+        if(_localBytes){
+            delete[] _localBytes;
+            _localBytes = nullptr;
+        }
     }
 
     uint16_t ApngReader::readShort() {
@@ -61,9 +65,9 @@ namespace apng{
 
     uint8_t* ApngReader::ensureBytes() {
         if(!_localBytes){
-            _localBytes = std::make_unique<uint8_t[]>(4);
+            _localBytes = new uint8_t [4];
         }
-        return _localBytes.get();
+        return _localBytes;
     }
 }
 

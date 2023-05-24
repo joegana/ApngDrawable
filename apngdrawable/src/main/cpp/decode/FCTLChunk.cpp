@@ -5,7 +5,7 @@
 #include "decode/FCTLChunk.h"
 namespace apng{
 
-    void FCTLChunk::innerParse(ApngReader *reader)  {
+    void FCTLChunk::innerParse(UApngReader reader)  {
         setSequenceNumber(reader->readInt());
         setWidth(reader->readInt());
         setHeight(reader->readInt());

@@ -29,7 +29,7 @@ namespace apng{
         uint8_t b ;
         auto c = AAsset_read(aAsset,&b, sizeof(b));
         if(c > 0){
-            mPosition ++ ;
+            mPosition += c ;
             return b ;
         }
         return  -1 ;
@@ -40,7 +40,7 @@ namespace apng{
         assert(buffer);
         auto c =  AAsset_read(aAsset,buffer+start,count);
         if( c > 0){
-            mPosition ++ ;
+            mPosition += c ;
             return c ;
         }
         return  -1 ;

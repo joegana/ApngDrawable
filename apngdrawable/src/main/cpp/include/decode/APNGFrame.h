@@ -7,18 +7,37 @@
 #include <stdint.h>
 #include <vector>
 #include <android/bitmap.h>
-#include "decode/Chunk.h"
-#include "decode/FCTLChunk.h"
-#include "decode/IDATChunk.h"
-#include "decode/ACTLChunk.h"
-#include "decode/FDATChunk.h"
-#include "decode/IENDChunk.h"
-#include "decode/IHDRChunk.h"
+#include "Chunk.h"
+#include "FCTLChunk.h"
+#include "IDATChunk.h"
+#include "ACTLChunk.h"
+#include "FDATChunk.h"
+#include "IENDChunk.h"
+#include "IHDRChunk.h"
 
 namespace apng {
+    class APNGFrame;
+    using UApngFrame  = std::unique_ptr<APNGFrame>;
+    using VUApngFrame = std::vector<UApngFrame> ;
+    using UVApngFrame = std::unique_ptr<VUApngFrame> ;
     class APNGFrame {
     public:
-        APNGFrame(ApngReader * reader,FCTLChunk * fctlChunk);
+        explicit APNGFrame(UApngReader reader);
+        explicit APNGFrame(UApngReader reader,UFCTLChunk fctlChunk);
+
+        size_t getFrameWidth(){
+            return frameWidth;
+        }
+        void setFrameWidth(size_t frameWidth){
+            this->frameWidth = frameWidth;
+        }
+
+        size_t getFrameHeight(){
+            return this->frameHeight;
+        }
+        void setFrameHeight(size_t frameHeight){
+            this->frameHeight = frameHeight;
+        }
 
         void setBlendOp(uint8_t blendOp){
             this->blend_op = blendOp;
@@ -45,24 +64,26 @@ namespace apng {
 
         void addImageChunk(std::unique_ptr<Chunk> chunk){
             if(chunk){
-                this->imageChunks.push_back(chunk);
+                this->imageChunks.push_back(std::move(chunk));
             }
         }
 
         void addPrefixChunk(std::unique_ptr<Chunk> chunk){
             if(chunk){
-                this->prefixChunks.push_back(chunk);
+                this->prefixChunks.push_back(std::move(chunk));
             }
         }
 
-
     private:
-        size_t encode(ApngWriter * reader);
+        size_t encode(UApngWriter  reader);
 
-    private:
-        Reader * reader ;
+    protected:
+        UReader reader ;
         size_t frameWidth;
         size_t frameHeight;
+    private:
+        APNGFrame(APNGFrame & frame) = delete ;
+        APNGFrame & operator=(APNGFrame & frame) = delete;
         size_t frameX;
         size_t frameY;
         size_t frameDuring ;
@@ -78,7 +99,5 @@ namespace apng {
                  0x44, 0xAE, 0x42, 0x60,  0x82};
     };
 }
-
-
 
 #endif //APNGDRAWABLE_APNGFRAME_H

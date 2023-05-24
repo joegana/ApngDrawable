@@ -59,4 +59,8 @@ namespace apng{
         putByte((val >> 16) & 0xff);
         putByte((val >> 24) & 0xff);
     }
+
+    uint8_t *ApngWriter::toByteArray() {
+        return fbuf;
+    }
 }

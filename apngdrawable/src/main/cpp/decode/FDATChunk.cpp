@@ -5,7 +5,7 @@
 #include "decode/FDATChunk.h"
 
 namespace  apng{
-    void FDATChunk::innerParse(ApngReader *reader) {
+    void FDATChunk::innerParse(UApngReader reader) {
         setSequenceNumber(reader->readInt());
     }
 }

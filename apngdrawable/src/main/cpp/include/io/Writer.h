@@ -13,11 +13,15 @@
 #include <cmath>
 #include "Log.h"
 namespace apng{
+    class Writer;
+    class ApngWriter;
+    using  UApngWriter = std::unique_ptr<ApngWriter>;
+    using  UWriter = std::unique_ptr<Writer>;
     class Writer {
         public:
             virtual void reset(size_t size) = 0 ;
             virtual void putByte(uint8_t b) = 0 ;
-            virtual void putBytes(const uint8_t* buf,size_t count);
+            virtual void putBytes(const uint8_t* buf,size_t count) = 0;
             virtual size_t position() = 0 ;
             virtual void skip(size_t length) = 0;
             virtual uint8_t * toByteArray() = 0;

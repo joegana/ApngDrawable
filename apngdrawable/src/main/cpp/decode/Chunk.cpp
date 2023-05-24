@@ -4,9 +4,9 @@
 
 #include "decode/Chunk.h"
 namespace apng{
-    void Chunk::parse(ApngReader *reader) {
+    void Chunk::parse(UApngReader reader) {
         size_t available = reader->available();
-        innerParse(reader);
+        innerParse(std::move(reader));
         size_t offset = available - reader->available() ;
         if(offset > length){
             throw "Out of chunk area";

@@ -111,10 +111,14 @@ namespace apng {
                 return this->blend_op ;
             }
 
+    public:
+        FCTLChunk(){};
+
     protected:
-            virtual void innerParse(ApngReader * reader) override;
+        virtual void innerParse(UApngReader reader) override;
 
     private:
+           FCTLChunk(FCTLChunk & chunk) = delete;
             // anim no
             size_t sequence_number;
 

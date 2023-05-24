@@ -9,8 +9,12 @@ namespace apng {
     class IENDChunk :public Chunk{
     public:
         static const size_t ID = fourCCToInt('I','E','N','D');
+    public:
+        IENDChunk(){};
     protected:
-        virtual void innerParse(ApngReader * reader);
+        virtual void innerParse(UApngReader reader) {}
+    private:
+        IENDChunk(IENDChunk & chunk) = delete;
     };
 }
 

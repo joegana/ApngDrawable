@@ -9,6 +9,9 @@
 #include "io/AssetReader.h"
 
 namespace apng{
+#ifdef __cplusplus
+    extern "C" {
+#endif
     class ApngReader final: public Reader{
         public:
             ApngReader(AssetReader * reader){
@@ -26,12 +29,15 @@ namespace apng{
         void close() override ;
 
         private:
-            uint8_t * ensureBytes();
+            uint8_t*  ensureBytes();
         private:
-            thread_local static  std::unique_ptr<uint8_t[]> _localBytes;
-            AssetReader * aReader ;
+             uint8_t* _localBytes;
+             AssetReader * aReader ;
 
     };
+#ifdef __cplusplus
+    }
+#endif
 }
 
 

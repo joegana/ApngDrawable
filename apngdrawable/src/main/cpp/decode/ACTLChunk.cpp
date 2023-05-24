@@ -5,7 +5,7 @@
 #include "decode/ACTLChunk.h"
 namespace apng{
 
-    void ACTLChunk::innerParse(ApngReader *reader)  {
+    void ACTLChunk::innerParse(UApngReader reader)  {
         size_t n = reader->readInt();
         setNumFrames(n);
         n = reader->readInt();

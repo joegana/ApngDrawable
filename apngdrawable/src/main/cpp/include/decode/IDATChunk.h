@@ -10,8 +10,12 @@ namespace apng {
     class IDATChunk: public Chunk{
          public:
             static const size_t ID = fourCCToInt('I','D','A','T');
+        public:
+            IDATChunk(){};
          protected:
-            virtual void innerParse(ApngReader * reader);
+            virtual void innerParse(UApngReader reader) {}
+        private:
+            IDATChunk(IDATChunk & chunk) = delete;
     };
 }
 

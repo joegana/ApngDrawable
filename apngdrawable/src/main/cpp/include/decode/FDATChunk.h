@@ -16,9 +16,14 @@ namespace apng {
             size_t getSequenceNumber(){
                 return this->sequence_number;
             }
+
+        public:
+            FDATChunk(){};
+
          protected:
-             virtual void innerParse(ApngReader * reader);
+             virtual void innerParse(UApngReader reader);
         private:
+            FDATChunk(FDATChunk & chunk) = delete;
             size_t sequence_number ;
 
     };

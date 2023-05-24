@@ -40,10 +40,14 @@ namespace apng {
                 return data;
             }
 
+         public:
+             IHDRChunk(){};
+
          protected:
-            virtual void innerParse(ApngReader * reader);
+            virtual void innerParse(UApngReader reader);
 
          private:
+             IHDRChunk(IHDRChunk & chunk) = delete;
              size_t width ;
              size_t height;
              uint8_t data[5];
