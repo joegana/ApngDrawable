@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/23.
+// Created by Justin on 2023/5/23.
 //
 
 #ifndef APNGDRAWABLE_STILLFRAME_H

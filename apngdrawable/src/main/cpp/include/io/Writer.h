@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/18.
+// Created by Justin on 2023/5/18.
 //
 
 #ifndef APNGDRAWABLE_WRITER_H

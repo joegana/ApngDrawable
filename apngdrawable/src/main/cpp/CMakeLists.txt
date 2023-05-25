@@ -5,9 +5,9 @@ project(apng)
 include_directories(include)
 
 file(GLOB_RECURSE  apng_drawable_header
+        include/*.h
         include/decode/*.h
         include/io/*.h
-        include/*.h
         )
 
 file(GLOB_RECURSE  apng_drawable_source
@@ -28,4 +28,5 @@ target_link_libraries(apng-drawable
         log
         android
         jnigraphics
+        z
         )

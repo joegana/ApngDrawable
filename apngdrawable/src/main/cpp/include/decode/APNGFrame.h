@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/16.
+// Created by Justin on 2023/5/16.
 //
 
 #ifndef APNGDRAWABLE_APNGFRAME_H
@@ -14,6 +14,7 @@
 #include "FDATChunk.h"
 #include "IENDChunk.h"
 #include "IHDRChunk.h"
+#include "Crc32.h"
 
 namespace apng {
     class APNGFrame;

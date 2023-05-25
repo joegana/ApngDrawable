@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/16.
+// Created by Justin on 2023/5/16.
 //
 
 #ifndef APNGDRAWABLE_CHUNK_H
@@ -58,10 +58,11 @@ namespace apng{
                 return this->offset ;
             }
 
-            Chunk(){};
+            Chunk() = default;
+            virtual ~Chunk() = default ;
             void parse(UApngReader reader);
 
-    protected:
+    private:
         virtual void innerParse(UApngReader reader) {};
 
     private:

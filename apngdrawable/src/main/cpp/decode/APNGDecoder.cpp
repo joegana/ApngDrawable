@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/22.
+// Created by Justin on 2023/5/22.
 //
 
 #include "decode/APNGDecoder.h"

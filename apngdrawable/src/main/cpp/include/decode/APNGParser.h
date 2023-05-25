@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/16.
+// Created by Justin on 2023/5/16.
 //
 
 #ifndef APNGDRAWABLE_APNGPARSER_H

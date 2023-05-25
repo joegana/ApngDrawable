@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/16.
+// Created by Justin on 2023/5/16.
 //
 
 #include "decode/APNGFrame.h"
@@ -56,7 +56,7 @@ namespace apng{
         writer->putInt(frameHeight);
         writer->putBytes(ihdrData,sizeof(ihdrData));
         // 计算CRC
-        size_t crc = 0 ;
+        size_t crc = getCrc32(writer->toByteArray(),sta) ;
         writer->putInt(crc);
 
         assert(reader);

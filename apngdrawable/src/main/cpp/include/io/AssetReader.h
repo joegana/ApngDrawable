@@ -1,5 +1,5 @@
 //
-// Created by admin on 2023/5/17.
+// Created by Justin on 2023/5/17.
 //
 
 #ifndef APNGDRAWABLE_ASSETREADER_H
