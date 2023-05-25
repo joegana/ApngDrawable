@@ -7,9 +7,15 @@
 #include<stdint.h>
 #include<zlib.h>
 namespace apng{
-    size_t getCrc32(uint8_t* buf,size_t len){
-        unsigned long crc = crc32(0L, nullptr, 0);
-        crc = crc32(crc, buf, len);
+    /**
+     * 计算buf[offset .... offset+len]的CRC32值
+     * @param buf
+     * @param offset
+     * @param len
+     * @return
+     */
+    static size_t  getCrc32(uint8_t* buf,size_t offset,size_t len){
+        size_t crc = crc32(0, buf + offset, len);
         return crc;
     }
 }

@@ -6,6 +6,10 @@
 #define APNGDRAWABLE_ASSETREADER_H
 #include "Reader.h"
 namespace apng{
+
+    class AssetReader;
+    using UAssetReader = std::unique_ptr<AssetReader> ;
+
     class AssetReader final:public Reader{
     public:
         AssetReader(AAsset * aAsset){

@@ -5,7 +5,7 @@
 #include "decode/APNGDecoder.h"
 
 namespace apng{
-    APNGDecoder::APNGDecoder(UApngReader reader) {
+    APNGDecoder::APNGDecoder(UApngReader&& reader) {
         this->apngReader = std::move(reader);
         this->snapShot = std::make_unique<SnapShot>();
         this->frames = std::make_unique<VUApngFrame>();
@@ -14,6 +14,7 @@ namespace apng{
 
     void APNGDecoder::release() {
         this->snapShot.reset();
+        this->apngReader->close();
     }
 
     size_t APNGDecoder::getLoopCount() const{
@@ -75,6 +76,18 @@ namespace apng{
         return std::make_unique<ARect>(ARect{0,0,
                                              static_cast<int32_t>(fwidth),
                                              static_cast<int32_t>(fheight)});
+    }
+
+    void APNGDecoder::start() {
+
+    }
+
+    void APNGDecoder::stop() {
+
+    }
+
+    bool APNGDecoder::isRunning() {
+        return false;
     }
 
     void APNGDecoder::setSurface(ASurfaceTexture * texture) {

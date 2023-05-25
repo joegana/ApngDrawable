@@ -14,8 +14,8 @@ namespace apng{
 #endif
     class ApngReader final: public Reader{
         public:
-            ApngReader(AssetReader * reader){
-                this->aReader = reader ;
+            ApngReader(UAssetReader &&  reader){
+                this->aReader = std::move(reader) ;
             }
         size_t readInt() ;
         uint16_t readShort();
@@ -32,7 +32,7 @@ namespace apng{
             uint8_t*  ensureBytes();
         private:
              uint8_t* _localBytes;
-             AssetReader * aReader ;
+             UAssetReader  aReader ;
 
     };
 #ifdef __cplusplus

@@ -5,6 +5,7 @@ project(apng)
 include_directories(include)
 
 file(GLOB_RECURSE  apng_drawable_header
+        jni/*.h
         include/*.h
         include/decode/*.h
         include/io/*.h
@@ -13,6 +14,7 @@ file(GLOB_RECURSE  apng_drawable_header
 file(GLOB_RECURSE  apng_drawable_source
          Decode/*.cpp
          io/*.cpp
+         jni/*.cpp
         )
 
 add_definitions(-DBUILD_DEBUG)

@@ -36,12 +36,10 @@ namespace apng{
         IDATChunk* idat ;
         FDATChunk* fdat ;
         for(auto & chunk:imageChunks){
-            idat = dynamic_cast<IDATChunk*>(chunk.get());
-            fdat = dynamic_cast<FDATChunk*>(chunk.get());
-            if(idat){
+            if(chunk->getFourCC() == IDATChunk::ID){
                 fSize += idat->getLength() + 12 ;
             }
-            if(fdat){
+            if(chunk->getFourCC() == FDATChunk::ID){
                 fSize += fdat->getLength() + 8 ;
             }
         }
@@ -56,7 +54,7 @@ namespace apng{
         writer->putInt(frameHeight);
         writer->putBytes(ihdrData,sizeof(ihdrData));
         // 计算CRC
-        size_t crc = getCrc32(writer->toByteArray(),sta) ;
+        size_t crc = getCrc32(writer->toByteArray(),start,17) ;
         writer->putInt(crc);
 
         assert(reader);
@@ -91,7 +89,7 @@ namespace apng{
 
                 writer->skip(chunk->getLength() - 4);
                 // 计算CRC
-                crc = 0 ;
+                crc = getCrc32(writer->toByteArray(),start,chunk->getLength()) ;
                 writer->putInt(crc);
             }
         }

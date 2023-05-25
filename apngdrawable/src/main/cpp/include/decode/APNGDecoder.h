@@ -12,16 +12,21 @@
 #include "StillFrame.h"
 #include "APNGParser.h"
 namespace apng{
+    class APNGDecoder ;
     using UARect = std::unique_ptr<ARect>;
+    using UAPNGDecoder = std::unique_ptr<APNGDecoder>;
     class APNGDecoder {
         public:
-            APNGDecoder(UApngReader reader);
+            APNGDecoder(UApngReader && reader);
             void setSurface(ASurfaceTexture * texture);
             UApngReader getReader();
             size_t getLoopCount() const;
             void release();
             UARect read(UApngReader reader);
             void renderFrame(UApngFrame frame);
+            void start();
+            void stop();
+            bool isRunning();
 
        protected:
 
