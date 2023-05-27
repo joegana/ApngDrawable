@@ -83,7 +83,7 @@ namespace apng{
     }
 
     void APNGDecoder::stop() {
-
+        this->release();
     }
 
     bool APNGDecoder::isRunning() {
